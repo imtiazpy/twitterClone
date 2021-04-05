@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+A Fake Social Media
+{% endblock head_title %}
+
+
+{% block content %}
+<!-- Showing the Welcome message  -->
+<div class="row text-center">
+    <div class="col mb-2">
+        <h2>Welcome to A Fake Social Media</h2>
+    </div>
+</div>
+
+<!-- Tweet form to post tweet -->
+<div class="row mb-3 justify-content-center">
+    <div class="col-md-4 max-auto col-10">
+        <form class="form" method="POST" action="/create_tweet/">
+            {% csrf_token %}
+            <input type="hidden" value="/" name="next"/>
+            <textarea class="form-control mb-2" name="content" placeholder="Your tweet here...."></textarea>
+            <button type="submit" class="btn btn-primary">Tweet</button>
+        </form>
+    </div>
+</div>
+
+<!-- showing the tweets from db through js -->
+<div class="row" id="tweets">
+    
+</div>
+
+<!-- JS for extracting data from API endpoint -->
+<script>
+    const tweetsElement = document.getElementById('tweets')
+    
+    const xhr = new XMLHttpRequest()
+    const method = 'GET'
+    const url = '/tweets'
+    const responseType = 'json'
+
+    function handleDidLike(tweet_id, currentCount) {
+        console.log(tweet_id, currentCount)
+    }
+
+    function LikeBtn(tweet) {
+        return "<button class='btn btn-primary btn-sm' onclick=handleDidLike(" + 
+        tweet.id + "," + tweet.likes + ")>" + tweet.likes + " Likes</button>"
+    }
+
+    function formatTweetElement(tweet) {
+        var formatedTweet = "<div class='col-12 col-md-10 mx-auto border rounded  py-3 mb-4 tweet' id='tweet-" + tweet.id 
+        + "'><p>" + tweet.content +             
+            "</p><div class='btn-group'>" + LikeBtn(tweet) +
+            "</div></div>"
+        return formatedTweet
+    }
+
+
+    xhr.responseType = responseType
+    xhr.open(method, url)
+    xhr.onload = function() {
+        const serverResponse = xhr.response
+        const listedItems = serverResponse.response
+        var finalTweetStr = ''
+        var i;
+        for (i=0; i<listedItems.length; i++) {
+            // console.log(listedItems[i])
+            var tweetObj = listedItems[i]
+            var currentItem = formatTweetElement(tweetObj) 
+            finalTweetStr += currentItem
+        }
+        tweetsElement.innerHTML = finalTweetStr
+        console.log(listedItems)        
+    }
+    xhr.send()
+
+
+
+
+</script>
+
+
+
+{% endblock content %}

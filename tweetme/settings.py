@@ -25,7 +25,7 @@ SECRET_KEY = 'ai)tpynvd#r=k(0z19epyn4da@_s5&srwjw-mkjhzi$v_h5q12'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'mydomain.com']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'tweetme.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
