@@ -43,9 +43,17 @@ A Fake Social Media
         console.log(tweet_id, currentCount)
     }
 
-    function LikeBtn(tweet) {
-        return "<button class='btn btn-primary btn-sm' onclick=handleDidLike(" + 
-        tweet.id + "," + tweet.likes + ")>" + tweet.likes + " Likes</button>"
+    // function LikeBtn(tweet) {
+    //     return "<button class='btn btn-primary btn-sm' onclick=handleDidLike(" + 
+    //     tweet.id + "," + tweet.likes + ")>" + tweet.likes + " Likes</button>"
+    // }
+
+    function LikeBtn (tweet) {
+        return `
+        <button class="btn btn-primary btn-sm" onclick=handleDidLike(${tweet.id}, ${tweet.likes})>
+            ${tweet.likes} Likes
+        </button>
+        `;
     }
 
     // function formatTweetElement(tweet) {
