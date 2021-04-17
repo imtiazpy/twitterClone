@@ -48,12 +48,22 @@ A Fake Social Media
         tweet.id + "," + tweet.likes + ")>" + tweet.likes + " Likes</button>"
     }
 
-    function formatTweetElement(tweet) {
-        var formatedTweet = "<div class='col-12 col-md-10 mx-auto border rounded  py-3 mb-4 tweet' id='tweet-" + tweet.id 
-        + "'><p>" + tweet.content +             
-            "</p><div class='btn-group'>" + LikeBtn(tweet) +
-            "</div></div>"
-        return formatedTweet
+    // function formatTweetElement(tweet) {
+    //     var formatedTweet = "<div class='col-12 col-md-10 mx-auto border rounded  py-3 mb-4 tweet' id='tweet-" + tweet.id 
+    //     + "'><p>" + tweet.content +             
+    //         "</p><div class='btn-group'>" + LikeBtn(tweet) +
+    //         "</div></div>"
+    //     return formatedTweet;
+    // }
+
+    function formatTweetElement (tweet) {
+        var formatedTweet = `
+        <div class="col-12 col-md-10 mx-auto border rounded py-3 mb-4 tweet" id="tweet-${tweet.id}">
+            <p>${tweet.content}</p>
+            <div class="btn-group">${LikeBtn(tweet)}</div>
+        </div>
+        `;
+        return formatedTweet;
     }
 
 
